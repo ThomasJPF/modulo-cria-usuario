@@ -200,7 +200,7 @@ jQuery(document).ready(function($) {
             error: function() {
                 // Exibir mensagem de erro
                 var messageBox = $('<div>').addClass('msg-bad')
-                    .append($('<span>').text('<?= _('Erro de comunicação com o servidor') ?>'));
+                    .append($('<span>').text('<?= _('Error de comunicação com o servidor') ?>'));
                 
                 // Adicionar mensagem ao topo do formulário
                 $form.prepend(messageBox);
