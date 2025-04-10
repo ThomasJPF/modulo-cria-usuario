@@ -11,7 +11,7 @@
  * @copyright   2024
  */
 
-namespace Modules\UserManager;
+namespace UserManager;
 
 use Zabbix\Core\CModule;
 use APP\CModuleManager;

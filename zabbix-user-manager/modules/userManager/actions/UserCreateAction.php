@@ -10,14 +10,14 @@
  * @copyright   2024
  */
 
-namespace Modules\UserManager\Actions;
+namespace UserManager\Actions;
 
 use API;
 use CControllerResponseData;
 use CControllerResponseFatal;
 use CController as CAction;
-use Modules\UserManager\Module;
-use Modules\UserManager\Models\User;
+use UserManager\Module;
+use UserManager\Models\User;
 use Exception;
 
 /**

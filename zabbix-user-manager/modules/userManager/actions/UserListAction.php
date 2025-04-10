@@ -2,7 +2,7 @@
 /**
  * Controlador de ação para listar usuários
  *
- * Este controlador gerencia a listagem de usuários no sistema.
+ * Este controlador gerencia a listagem de usuários no sistema Zabbix.
  * 
  * @package     UserManager\Actions
  * @version     1.0
@@ -10,12 +10,12 @@
  * @copyright   2024
  */
 
-namespace Modules\UserManager\Actions;
+namespace UserManager\Actions;
 
 use API;
 use CControllerResponseData;
 use CController as CAction;
-use Modules\UserManager\Module;
+use UserManager\Module;
 use Modules\UserManager\Models\User;
 use Exception;
 

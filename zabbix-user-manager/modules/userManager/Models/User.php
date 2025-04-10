@@ -10,13 +10,14 @@
  * @copyright   2024
  */
 
-namespace Modules\UserManager\Models;
+namespace UserManager\Models;
 
 use API;
 use CApiInputValidator;
-use Modules\UserManager\Module;
-use Modules\UserManager\Services\EmailService;
-use Modules\UserManager\Services\LogService;
+use UserManager\Module;
+use UserManager\Services\EmailService;
+use UserManager\Services\LogService;
+use Exception;
 
 /**
  * Classe User - Gerencia operações relacionadas a usuários
@@ -29,6 +30,20 @@ class User {
     private $history;
     
     /**
+     * Serviço de e-mail
+     * 
+     * @var EmailService
+     */
+    private $emailService;
+    
+    /**
+     * Serviço de log
+     * 
+     * @var LogService
+     */
+    private $logService;
+    
+    /**
      * Construtor da classe
      * 
      * @param array $data Dados do usuário (opcional)
@@ -36,6 +51,8 @@ class User {
     public function __construct(array $data = []) {
         $this->data = $data;
         $this->history = [];
+        $this->emailService = new EmailService();
+        $this->logService = new LogService();
     }
     
     /**
@@ -47,12 +64,12 @@ class User {
      * @param array $media_types Tipos de mídia para o usuário
      * 
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function createUser(string $email, array $groups, string $roleid, array $media_types = []): bool {
         // Validar email
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new \Exception('E-mail inválido');
+            throw new Exception('E-mail inválido');
         }
         
         // Extrair nome de usuário do e-mail
@@ -130,18 +147,18 @@ class User {
         $result = API::User()->create($userData);
         
         if (!$result) {
-            throw new \Exception('Erro ao criar usuário: ' . API::getErrorMessage());
+            throw new Exception('Erro ao criar usuário: ' . API::getErrorMessage());
         }
         
         // Armazenar ID do usuário criado
         $userid = $result['userids'][0];
         
         // Registrar log de criação
-        LogService::logUserAction($userid, 'create', $this->getUsername());
-        
-        // Enviar e-mail com credenciais
-        $emailService = new EmailService();
-        $emailService->sendUserCredentials($email, $username, $password);
+        $this->logService->logAction('create_user', [
+            'userid' => $userid,
+            'email' => $email,
+            'email_sent' => $this->emailService->sendCredentials($email, $username, $password)
+        ]);
         
         return true;
     }
@@ -201,7 +218,7 @@ class User {
      */
     public function getActionHistory(string $userid, int $limit = 50): array {
         // Consultar logs de ação registrados pelo nosso módulo
-        return LogService::getUserActions($userid, $limit);
+        return $this->logService->getUserActions($userid, $limit);
     }
     
     /**
@@ -256,7 +273,11 @@ class User {
             
             if ($result) {
                 $status = $active ? 'activate' : 'deactivate';
-                LogService::logUserAction($userid, $status, $this->getUsername());
+                $this->logService->logAction($status . '_user', [
+                    'userid' => $userid,
+                    'email' => $user['email'],
+                    'email_sent' => $this->emailService->sendCredentials($user['email'], $user['username'], '')
+                ]);
                 return true;
             }
         }
@@ -275,7 +296,7 @@ class User {
         $user = $this->getById($userid);
         
         if (!$user) {
-            throw new \Exception('Usuário não encontrado');
+            throw new Exception('Usuário não encontrado');
         }
         
         // Gerar nova senha
@@ -289,17 +310,15 @@ class User {
         ]);
         
         if (!$result) {
-            throw new \Exception('Erro ao redefinir senha: ' . API::getErrorMessage());
+            throw new Exception('Erro ao redefinir senha: ' . API::getErrorMessage());
         }
         
         // Registrar log
-        LogService::logUserAction($userid, 'password_reset', $this->getUsername());
-        
-        // Enviar email com nova senha
-        if (isset($user['email']) && $user['email']) {
-            $emailService = new EmailService();
-            $emailService->sendPasswordReset($user['email'], $user['username'], $password);
-        }
+        $this->logService->logAction('password_reset', [
+            'userid' => $userid,
+            'email' => $user['email'],
+            'email_sent' => $this->emailService->sendPasswordReset($user['email'], $user['username'], $password)
+        ]);
         
         return $password;
     }
