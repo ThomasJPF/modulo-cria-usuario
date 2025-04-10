@@ -1,8 +1,8 @@
 <?php
 /**
- * Controlador de ação para estatísticas de usuário
+ * Controlador de ação para estatísticas de usuários
  *
- * Este controlador gerencia a exibição de estatísticas e histórico de usuários.
+ * Este controlador gerencia o painel de estatísticas para um determinado usuário.
  * 
  * @package     UserManager\Actions
  * @version     1.0
@@ -10,18 +10,18 @@
  * @copyright   2024
  */
 
-namespace Modules\UserManager\Actions;
+namespace UserManager\Actions;
 
 use API;
 use CControllerResponseData;
 use CControllerResponseFatal;
 use CController as CAction;
-use Modules\UserManager\Module;
+use UserManager\Module;
 use Modules\UserManager\Models\User;
 use Exception;
 
 /**
- * Classe UserStatsAction - Controlador para estatísticas de usuário
+ * Classe UserStatsAction - Controlador para estatísticas de usuários
  */
 class UserStatsAction extends CAction {
     /**

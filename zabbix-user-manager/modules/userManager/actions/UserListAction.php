@@ -16,7 +16,7 @@ use API;
 use CControllerResponseData;
 use CController as CAction;
 use UserManager\Module;
-use Modules\UserManager\Models\User;
+use UserManager\Models\User;
 use Exception;
 
 /**
