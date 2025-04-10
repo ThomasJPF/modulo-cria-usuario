@@ -79,7 +79,7 @@ class UserCreateAction extends CAction {
             $data = [
                 'page' => [
                     'title' => _('Criar novo usuário'),
-                    'docurl' => 'https://github.com/seu-usuario/zabbix-user-manager'
+                    'docurl' => 'https://github.com/ThomasJPF/modulo-cria-usuario'
                 ]
             ];
             

@@ -83,7 +83,7 @@ class UserStatsAction extends CAction {
             $data = [
                 'page' => [
                     'title' => _('Estatísticas do usuário'),
-                    'docurl' => 'https://github.com/seu-usuario/zabbix-user-manager'
+                    'docurl' => 'https://github.com/ThomasJPF/modulo-cria-usuario'
                 ],
                 'user' => $user
             ];

@@ -6,7 +6,7 @@
     "namespace": "UserManager",
     "author": "Zabbix User Manager Team",
     "description": "Módulo para gerenciamento simplificado de usuários no Zabbix 7",
-    "url": "https://github.com/seu-usuario/zabbix-user-manager",
+    "url": "https://github.com/ThomasJPF/modulo-cria-usuario",
     "actions": {
         "userManager.view": {
             "class": "UserManager\\Actions\\UserListAction",

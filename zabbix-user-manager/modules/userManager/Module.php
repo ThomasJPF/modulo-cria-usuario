@@ -13,13 +13,14 @@
 
 namespace Modules\UserManager;
 
+use Zabbix\Core\CModule;
 use APP\CModuleManager;
 use CController as CControllerBase;
 
 /**
  * Classe Module - Ponto de entrada principal para o módulo
  */
-class Module extends \Core\CModule {
+class Module extends CModule {
     /**
      * Inicializa o módulo.
      */

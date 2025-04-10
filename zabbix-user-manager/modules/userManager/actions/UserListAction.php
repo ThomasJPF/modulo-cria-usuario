@@ -73,7 +73,7 @@ class UserListAction extends CAction {
         $data = [
             'page' => [
                 'title' => _('Gerenciamento de usuários'),
-                'docurl' => 'https://github.com/seu-usuario/zabbix-user-manager'
+                'docurl' => 'https://github.com/ThomasJPF/modulo-cria-usuario'
             ],
             'filter' => [
                 'name' => $this->getInput('filter_name', ''),

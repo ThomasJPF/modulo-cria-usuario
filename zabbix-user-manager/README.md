@@ -21,7 +21,7 @@ Módulo para o Zabbix 7 que permite gerenciar usuários de forma simplificada. O
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/zabbix-user-manager.git
+git clone https://github.com/ThomasJPF/modulo-cria-usuario.git
 ```
 
 ### 2. Copie os arquivos do módulo
