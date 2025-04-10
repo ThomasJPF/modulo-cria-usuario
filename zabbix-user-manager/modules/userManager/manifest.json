@@ -1,1 +1,53 @@
- 
+{
+    "manifest_version": 2.0,
+    "id": "userManager",
+    "name": "User Manager",
+    "version": "1.0",
+    "namespace": "UserManager",
+    "author": "Zabbix User Manager Team",
+    "description": "Módulo para gerenciamento simplificado de usuários no Zabbix 7",
+    "url": "https://github.com/seu-usuario/zabbix-user-manager",
+    "actions": {
+        "userManager.view": {
+            "class": "UserManager\\Actions\\UserListAction",
+            "view": "user.list",
+            "layout": "layout.htmlpage"
+        },
+        "userManager.create": {
+            "class": "UserManager\\Actions\\UserCreateAction",
+            "view": "user.create",
+            "layout": "layout.htmlpage"
+        },
+        "userManager.edit": {
+            "class": "UserManager\\Actions\\UserEditAction",
+            "view": "user.edit",
+            "layout": "layout.htmlpage"
+        },
+        "userManager.delete": {
+            "class": "UserManager\\Actions\\UserDeleteAction"
+        },
+        "userManager.stats": {
+            "class": "UserManager\\Actions\\UserStatsAction",
+            "view": "user.stats",
+            "layout": "layout.htmlpage"
+        }
+    },
+    "assets": {
+        "css": ["assets/css/userManager.css"],
+        "js": ["assets/js/userManager.js"]
+    },
+    "config": {
+        "smtp_server": "",
+        "smtp_port": 587,
+        "smtp_user": "",
+        "smtp_password": "",
+        "smtp_from": "zabbix@seudominio.com.br",
+        "smtp_use_tls": true
+    },
+    "requirements": {
+        "zabbix": {
+            "min": "7.0.0",
+            "max": "7.9.9"
+        }
+    }
+} 

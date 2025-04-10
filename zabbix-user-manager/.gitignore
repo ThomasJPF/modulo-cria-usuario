@@ -1,0 +1,28 @@
+# Arquivos de configuração com dados sensíveis
+config_local.php
+
+# Arquivos de ambiente
+.env
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Diretórios de dependências
+/vendor/
+/node_modules/
+
+# Arquivos de IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace 
